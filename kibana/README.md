@@ -114,3 +114,20 @@ Ahora que ya tenemos el laboratorio desplegado, vemos que en el contenedor tenem
 Según el repo de github de vulhub de **kibana** podemos utilizar ingeniería inversa, entonces lo primero que haré es entrar en la máquina para crear un archivo **.js**
 
 ![máquina](./images/10.png)
+
+---
+
+Pero la máquina tiene instalado **nano** y al hacer un **apt-update** tampoco nos funciona, la solución es ejecutar lo siguiente con **echo**: 
+```bash
+echo "deb http://archive.debian.org/debian/ jessie contrib main non-free" > /etc/apt/sources.list
+```
+Ahora cuando ya hemos actualizado, ya podemos instalar nano:
+
+![máquina](./images/11.png)
+
+---
+
+Ahora si nos creamos el archivo **reverse.js** con nano y buscamos en github: **NodeJs reverse shell**
+y nos dan un ejemplo:
+
+

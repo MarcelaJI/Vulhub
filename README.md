@@ -15,7 +15,7 @@ El objetivo principal es educativo: documentar el proceso de explotación y aná
 
 ## 📦 Máquinas resueltas
 
-- [Injection](./Injection) ✅  
+- [Kibana](./kibana) ✅  
 
 
 _(Se irán añadiendo más máquinas conforme avance.)_

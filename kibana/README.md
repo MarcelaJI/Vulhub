@@ -4,15 +4,15 @@
 
 ## 🐞 Descripción de la vulnerabilidad
 
-Esta máquina explota una vulnerabilidad de **Local File Inclusion (LFI)** en Kibana, que permite a un atacante leer archivos locales del sistema donde se está ejecutando el servicio.
+Esta máquina explota una vulnerabilidad de **Local File Inclusion (LFI)** en Kibana, que permite a un atacante leer archivos locales del sistema donde se ejecuta el servicio.
 
-Una LFI ocurre cuando una aplicación web permite incluir archivos del sistema local sin la debida validación. En este caso, mediante una petición especialmente construida, se pueden leer archivos como `/etc/passwd`, `.bash_history`, o archivos sensibles de configuración.
+Una LFI ocurre cuando una aplicación web permite incluir archivos del sistema local sin una validación adecuada. En este caso, mediante una petición especialmente construida, se pueden leer archivos como `/etc/passwd`, `.bash_history`, o archivos sensibles de configuración.
 
-> 💥 Este tipo de vulnerabilidad puede ser aprovechado para obtener credenciales, secretos, o incluso escalar privilegios si se combina con otros vectores de ataque.
+> 💥 Este tipo de vulnerabilidad puede ser aprovechado para obtener credenciales, secretos o incluso escalar privilegios si se combina con otros vectores de ataque.
 
 ## ✅ Objetivo
 
-Explotar la vulnerabilidad LFI en Kibana para acceder a archivos sensibles y comprender el impacto de esta falla en un entorno real.
+Explotar la vulnerabilidad LFI en Kibana para acceder a archivos sensibles y demostrar su impacto en un entorno controlado.
 
 ---
 
@@ -105,13 +105,13 @@ Ahora que ya tenemos el laboratorio desplegado, vemos que en el contenedor tenem
 ![máquina](./images/8.png)
 ---
 
-## Ingeniería Inversa
+## Reverse Shell con Node.js
 
 ![máquina](./images/9.png)
 
 ---
 
-Según el repo de github de vulhub de **kibana** podemos utilizar ingeniería inversa, entonces lo primero que haré es entrar en la máquina para crear un archivo **.js**
+Aunque el repositorio menciona *ingeniería inversa*, en este caso se implementa una **reverse shell en Node.js**.
 
 ![máquina](./images/10.png)
 
@@ -134,6 +134,42 @@ y nos dan un ejemplo:
 
 ---
 
-Este script crea una reverse shell en Node.js que se conecta a 192.168.33.1:8080, redirigiendo la entrada/salida del shell (/bin/sh) a través de un socket. Permite al host remoto ejecutar comandos en la máquina comprometida. Ahora solo modificaremos el host y el puerto, el puerto pondremos el **443** ya que nos pondremos en escucha con **netcat** en ese puerto en nuestra máquina, y el host podremos el que se ha asignado por defecto en docker en nuestro equipo por ejemplo haciendo un **ifconfig** el mío es:
+Este script se conecta al host atacante a través de un socket (puerto 443), redirigiendo entrada/salida del shell (`/bin/sh`) para permitir control remoto: 
 
+![máquina](./images/13.png)
 
+---
+
+Entonces el script quedaría así:
+
+![máquina](./images/14.png)
+
+---
+
+## Explotación de Vulnerabilidad
+
+Ahora utilizaremos un  Path Traversal:
+
+Es una vulnerabilidad en la que el atacante manipula las rutas de archivos en una aplicación web para acceder a archivos del sistema que no deberían estar disponibles.
+
+Se usa ../ repetidamente para subir directorios hasta llegar a la raíz /.
+
+Luego, se especifica un archivo como /etc/passwd.
+
+Como ya tenemos el ejemplo que nos han dado en git de un path traversal en vulhub.
+
+Sólo haremos un pequeño cambio al final de la ruta pondremos el archivo que nos hemos creado con **JS** así:
+
+![máquina](./images/15.png)
+
+---
+
+Se utiliza `netcat` para escuchar, y se entrega el payload mediante Path Traversal.
+
+Máquina resuelta y comprometida exitosamente:)
+
+🛡️ **Nota**: Esta práctica se realizó en un entorno controlado y con fines educativos. Nunca explotes vulnerabilidades sin autorización explícita.
+
+📅 Resuelta el 02/06/25
+
+👩 Por Marcela Jiménez (aka Mar) 🐉

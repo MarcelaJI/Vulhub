@@ -105,3 +105,12 @@ Ahora que ya tenemos el laboratorio desplegado, vemos que en el contenedor tenem
 ![máquina](./images/8.png)
 ---
 
+## Ingeniería Inversa
+
+![máquina](./images/9.png)
+
+---
+
+Según el repo de github de vulhub de **kibana** podemos utilizar ingeniería inversa, entonces lo primero que haré es entrar en la máquina para crear un archivo **.js**
+
+![máquina](./images/10.png)

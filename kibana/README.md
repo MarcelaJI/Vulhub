@@ -134,7 +134,9 @@ y nos dan un ejemplo:
 
 ---
 
-Este script se conecta al host atacante a través de un socket (puerto 443), redirigiendo entrada/salida del shell (`/bin/sh`) para permitir control remoto: 
+Este script se conecta al host atacante a través de un socket (puerto 443), redirigiendo entrada/salida del shell (`/bin/sh`) para permitir control remoto.
+
+Me voy a if config para ver mi host de **docker** y lo ponemos en el script: 
 
 ![máquina](./images/13.png)
 

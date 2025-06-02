@@ -130,4 +130,10 @@ Ahora cuando ya hemos actualizado, ya podemos instalar nano:
 Ahora si nos creamos el archivo **reverse.js** con nano y buscamos en github: **NodeJs reverse shell**
 y nos dan un ejemplo:
 
+![máquina](./images/12.png)
+
+---
+
+Este script crea una reverse shell en Node.js que se conecta a 192.168.33.1:8080, redirigiendo la entrada/salida del shell (/bin/sh) a través de un socket. Permite al host remoto ejecutar comandos en la máquina comprometida. Ahora solo modificaremos el host y el puerto, el puerto pondremos el **443** ya que nos pondremos en escucha con **netcat** en ese puerto en nuestra máquina, y el host podremos el que se ha asignado por defecto en docker en nuestro equipo por ejemplo haciendo un **ifconfig** el mío es:
+
 
